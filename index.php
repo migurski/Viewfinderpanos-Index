@@ -9109,42 +9109,26 @@ S56W069.hgt	N19/S56W069.hgt	/dem3/SN19.zip
 S56W070.hgt	N19/S56W070.hgt	/dem3/SN19.zip
 S56W071.hgt	N19/S56W071.hgt	/dem3/SN19.zip
 S56W072.hgt	N19/S56W072.hgt	/dem3/SN19.zip
-DATA
+DATA;
     
     $file = ltrim($_SERVER['PATH_INFO'], '/');
-
     $lines = explode("\n", $data);
     
     foreach($lines as $line)
     {
         if(substr($line, 0, strlen($file)+1) == "{$file}\t")
         {
-            print_r($line);
+            list($name, $path, $url) = explode("\t", $line);
+            
+            $url = 'http://www.viewfinderpanoramas.org/'.ltrim($url, '/');
+            
+            header('HTTP/1.1 302');
+            header("Location: $url");
+            header("X-Zip-Path: $path");
+            exit("$url\n");
         }
     }
     
-    exit();
-    
-    if($fp = @fopen('../viewfinderpanoramas-catalog.txt', 'r'))
-    {
-        $columns = array_flip(fgetcsv($fp, 256, "\t"));
-        
-        while($row = fgetcsv($fp, 256, "\t"))
-        {
-            $name = $row[$columns['name']];
-            $path = $row[$columns['path']];
-            $url = $row[$columns['url']];
-        
-            if($name == $file)
-            {
-                header('HTTP/1.1 302');
-                header("Location: $url");
-                header("X-Zip-Path: $path");
-                exit("$url\n");
-            }
-        }
-    }
-
     header('HTTP/1.1 404');
     exit("Sorry.\n");
 
