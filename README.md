@@ -9,7 +9,7 @@ More information about the project:
 * [ Digital Elevation Data ]( http://www.viewfinderpanoramas.org/dem3/DEM3-ReadMe.html )
 * [ Coverage Map ]( http://www.viewfinderpanoramas.org/Coverage%20map%20viewfinderpanoramas_org3.htm )
 
-Index collected August, 2012.
+Index collected August, 2012 using `viewfinderpanoramas-catalog.py` script.
 
 The application is currently deployed to Heroku and can be used directly via [viewfinderpanos-index.herokuapp.com]( http://viewfinderpanos-index.herokuapp.com/index.php/S55W036.hgt ).
 
